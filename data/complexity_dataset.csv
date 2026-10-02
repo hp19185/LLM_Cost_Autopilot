@@ -1,0 +1,211 @@
+prompt,tier
+Extract the email addresses from this text.,1
+Extract all phone numbers from this document.,1
+Extract the names from this paragraph.,1
+Extract the dates from this text.,1
+Extract the enrollment numbers from this list.,1
+Extract the URLs from this document.,1
+Extract the product names from this paragraph.,1
+Extract the cities mentioned in this text.,1
+Extract the prices from this product description.,1
+Extract the subject names from this document.,1
+Convert this list into JSON format.,1
+Convert this table into CSV format.,1
+Convert these values into a Python list.,1
+Convert this text into bullet points.,1
+Convert these numbers into a comma-separated list.,1
+Convert this date to DD-MM-YYYY format.,1
+Convert this paragraph into a numbered list.,1
+Convert these values into a dictionary.,1
+Convert this table into Markdown.,1
+Convert this text to uppercase.,1
+Correct the grammar in this sentence.,1
+Correct the spelling mistakes in this paragraph.,1
+Rewrite this sentence in simple English.,1
+Rewrite this sentence in formal English.,1
+Translate this sentence into Gujarati.,1
+Translate this sentence into Hindi.,1
+Change these words to uppercase.,1
+Change these words to lowercase.,1
+Remove duplicate values from this list.,1
+Sort these numbers in ascending order.,1
+What is the capital of France?,1
+What is the largest planet in the solar system?,1
+What is 25 multiplied by 4?,1
+What is the boiling point of water?,1
+What is the full form of CPU?,1
+What is the full form of RAM?,1
+What is Python?,1
+What is machine learning?,1
+What is an API?,1
+What is a database?,1
+List the names mentioned in this paragraph.,1
+Count the number of items in this list.,1
+Identify the date mentioned in this text.,1
+Identify the main subject in this sentence.,1
+Find the enrollment number in this text.,1
+Find the postal code in this address.,1
+Identify the country mentioned in this paragraph.,1
+Identify the programming language mentioned here.,1
+Find the file extension mentioned in this text.,1
+Identify the department name in this document.,1
+Give me the subject names from this paragraph.,1
+List all the numbers in this sentence.,1
+List all the programming languages mentioned here.,1
+List the countries mentioned in this paragraph.,1
+List the colors mentioned in this text.,1
+List the technologies mentioned in this sentence.,1
+List the file names from this text.,1
+List the dates mentioned in this document.,1
+List the names of the products.,1
+List the headings from this document.,1
+Format this address properly.,1
+Format this phone number correctly.,1
+Format these numbers as percentages.,1
+Format this date consistently.,1
+Format this list as bullet points.,1
+Format these values as currency.,1
+Remove extra spaces from this text.,1
+Remove punctuation from this sentence.,1
+Identify whether this sentence is a question.,1
+Count the words in this paragraph.,1
+Summarize this article in five bullet points.,2
+Summarize this research paper in 200 words.,2
+Summarize these meeting notes and identify action items.,2
+Summarize this technical documentation.,2
+Summarize this business report.,2
+Summarize the following news article.,2
+Summarize this project description and identify the objectives.,2
+Summarize this academic abstract.,2
+Summarize the following customer feedback.,2
+Summarize this software documentation.,2
+Classify these customer reviews as positive or negative.,2
+Classify these support tickets by issue type.,2
+Classify these transactions as normal or suspicious.,2
+Classify these products into their categories.,2
+Classify these emails according to their topic.,2
+Classify these student responses by category.,2
+Classify these documents according to their type.,2
+Classify these comments as technical or non-technical.,2
+Classify these complaints by problem type.,2
+Classify these questions according to their subject.,2
+Analyze this sales data and identify the main trends.,2
+Analyze these customer complaints and identify common issues.,2
+Analyze this paragraph and identify its main argument.,2
+Analyze the following student performance data.,2
+Analyze this dataset and identify unusual values.,2
+Analyze this survey and summarize the main findings.,2
+Analyze these website statistics.,2
+Analyze this employee feedback and identify common themes.,2
+Analyze these test results and summarize the findings.,2
+Analyze this product feedback and identify major concerns.,2
+Compare these two software architectures.,2
+Compare the features of these two smartphones.,2
+Compare these two programming languages.,2
+Compare these two databases based on their features.,2
+Compare these two cloud services.,2
+Compare these two machine learning algorithms.,2
+Compare these two approaches and list their advantages.,2
+Compare these two products using the given specifications.,2
+Compare these two datasets.,2
+Compare these two project proposals.,2
+Create a structured report from this information.,2
+Create a comparison table from the provided information.,2
+Create a summary report from these meeting notes.,2
+Create a structured list of the main findings.,2
+Create a report showing the major issues.,2
+Create a table comparing these options.,2
+Create a summary of this technical document.,2
+Create a structured analysis of these responses.,2
+Create a report from this survey data.,2
+Create a categorized summary of these comments.,2
+Identify the main advantages and disadvantages of this approach.,2
+Identify the most important factors in this dataset.,2
+Identify the major risks described in this report.,2
+Identify the key findings from this research abstract.,2
+Identify the main problems in this project description.,2
+Identify the common issues in these customer complaints.,2
+Identify the important trends in this data.,2
+Identify the main themes in these responses.,2
+Identify the strengths and weaknesses of this proposal.,2
+Identify the key differences between these approaches.,2
+Evaluate these three options based on the given criteria.,2
+Evaluate these products using the provided specifications.,2
+Evaluate the performance results in this table.,2
+Evaluate these customer responses and summarize the result.,2
+Evaluate these project alternatives using the given factors.,2
+Evaluate this dataset and identify possible problems.,2
+Evaluate these software features and compare them.,2
+Evaluate the results of this experiment.,2
+Evaluate these proposals based on their stated objectives.,2
+Evaluate this technical approach and list its limitations.,2
+Design a scalable distributed architecture for a banking system.,3
+Design an end-to-end machine learning pipeline for diabetes prediction.,3
+Design a fault-tolerant cloud architecture for a large-scale application.,3
+Design a deep learning architecture for classifying medical images.,3
+Design a complete AI system for detecting fraudulent financial transactions.,3
+Design a multi-agent AI system with task delegation and failure recovery.,3
+Design an intelligent routing system for multiple LLM providers.,3
+Design an end-to-end healthcare AI solution considering privacy and reliability.,3
+Design a distributed system that remains available during infrastructure failures.,3
+"Design a scalable architecture considering performance, cost, and reliability.",3
+Develop a comprehensive migration strategy from a monolithic system to microservices.,3
+Develop a detailed cybersecurity incident response strategy for this scenario.,3
+Develop a detailed research methodology for validating this machine learning model.,3
+"Develop an optimization strategy considering cost, latency, scalability, and reliability.",3
+Develop a complete disaster recovery architecture for a mission-critical system.,3
+Develop a detailed strategy for reducing cloud infrastructure costs without reducing reliability.,3
+Develop a complete machine learning solution for predicting customer churn.,3
+Develop a comprehensive architecture for a high-traffic web application.,3
+Develop a detailed implementation strategy for migrating this legacy system.,3
+Develop a complete evaluation framework for this AI system.,3
+Analyze this complex business problem and develop a step-by-step solution.,3
+Analyze the trade-offs between these approaches under multiple constraints.,3
+Analyze this complex dataset and develop hypotheses explaining the observed patterns.,3
+Analyze this system architecture and identify scalability bottlenecks and solutions.,3
+Analyze the security risks of this architecture and develop mitigation strategies.,3
+Analyze these competing technical approaches considering cost and performance.,3
+Analyze this AI pipeline and propose improvements for accuracy and reliability.,3
+Analyze this distributed system and develop a strategy for handling failures.,3
+Analyze this complex optimization problem and propose an efficient solution.,3
+Analyze this software architecture and redesign it for large-scale deployment.,3
+Solve this multi-step engineering problem and explain every design decision.,3
+Develop a detailed solution for this multi-step optimization problem.,3
+Solve this complex scheduling problem while satisfying all constraints.,3
+Solve this multi-stage data processing problem and explain the approach.,3
+Solve this complex algorithmic problem and compare alternative solutions.,3
+Solve this optimization problem considering multiple conflicting objectives.,3
+Develop a complete solution for this distributed computing problem.,3
+Develop a detailed solution for this complex database design problem.,3
+Solve this multi-step reasoning problem using the provided constraints.,3
+Develop a complete technical solution and justify each major decision.,3
+Develop a comprehensive strategy for improving the reliability of this AI system.,3
+Design a complete security architecture for a large enterprise application.,3
+"Develop a strategy for optimizing an application across cost, latency, and quality.",3
+Design a complete data engineering pipeline for a large-scale analytics platform.,3
+Develop an end-to-end strategy for deploying machine learning models in production.,3
+Design a resilient microservices architecture with monitoring and recovery.,3
+Develop a complete strategy for scaling this application to millions of users.,3
+"Design an AI-powered system while considering accuracy, latency, privacy, and cost.",3
+Develop a comprehensive testing strategy for a safety-critical software system.,3
+Design a complete architecture for a real-time fraud detection platform.,3
+Design a scalable event-driven architecture for a real-time analytics platform.,3
+Develop a complete architecture for an enterprise-level AI assistant.,3
+"Design a distributed database solution considering consistency, availability, and scalability.",3
+Develop a production deployment strategy for a large language model application.,3
+Analyze a complex cloud infrastructure and develop a cost optimization plan.,3
+Design a secure multi-tenant SaaS architecture with high availability.,3
+Develop an end-to-end MLOps strategy for continuous model training and deployment.,3
+"Design a real-time recommendation system considering latency, scalability, and accuracy.",3
+Develop a complete observability strategy for a distributed microservices platform.,3
+Analyze this system under multiple failure scenarios and design recovery mechanisms.,3
+"Design an LLM application architecture with caching, routing, evaluation, and monitoring.",3
+Develop a comprehensive strategy for reducing inference costs while maintaining response quality.,3
+"Design a high-availability API platform with load balancing, failover, and monitoring.",3
+Develop a complete data governance architecture for an enterprise AI platform.,3
+"Analyze the trade-offs between local and cloud LLM deployment considering cost, latency, privacy, and quality.",3
+Design a complete workflow for automatically evaluating and improving an AI model.,3
+Develop a fault-tolerant architecture for processing millions of events per day.,3
+"Design an intelligent system that dynamically balances model quality, cost, and latency.",3
+Develop a comprehensive architecture for secure processing of sensitive healthcare data.,3
+Design and justify an end-to-end production architecture for a scalable generative AI platform.,3

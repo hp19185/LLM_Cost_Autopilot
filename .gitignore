@@ -1,0 +1,8 @@
+@"
+venv/
+.env
+__pycache__/
+*.pyc
+.idea/
+data/autopilot.db
+"@ | Set-Content .gitignore

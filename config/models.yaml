@@ -1,0 +1,25 @@
+models:
+
+  claude_haiku:
+    provider: anthropic
+    model_id: claude-haiku-4-5-20251001
+    input_cost_per_million: 1.00
+    output_cost_per_million: 5.00
+    average_latency_ms: 1000
+    quality_tier: low
+
+  claude_sonnet:
+    provider: anthropic
+    model_id: claude-sonnet-4-6
+    input_cost_per_million: 3.00
+    output_cost_per_million: 15.00
+    average_latency_ms: 2000
+    quality_tier: medium
+
+  llama_local:
+    provider: ollama
+    model_id: llama3.2:3b
+    input_cost_per_million: 0.00
+    output_cost_per_million: 0.00
+    average_latency_ms: 0
+    quality_tier: low
