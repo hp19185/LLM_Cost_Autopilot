@@ -76,7 +76,50 @@ def load_requests():
 
 df = load_requests()
 
+# -----------------------------
+# Dashboard Filters
+# -----------------------------
 
+st.sidebar.header("Filters")
+
+# Model filter
+model_options = ["All"] + sorted(df["model_name"].dropna().unique().tolist())
+selected_model = st.sidebar.selectbox(
+    "Model",
+    model_options
+)
+
+# Complexity tier filter
+tier_options = ["All"] + sorted(df["complexity_tier"].dropna().unique().tolist())
+selected_tier = st.sidebar.selectbox(
+    "Complexity Tier",
+    tier_options
+)
+
+# Provider filter
+provider_options = ["All"] + sorted(df["provider"].dropna().unique().tolist())
+selected_provider = st.sidebar.selectbox(
+    "Provider",
+    provider_options
+)
+
+# Apply filters
+filtered_df = df.copy()
+
+if selected_model != "All":
+    filtered_df = filtered_df[
+        filtered_df["model_name"] == selected_model
+    ]
+
+if selected_tier != "All":
+    filtered_df = filtered_df[
+        filtered_df["complexity_tier"] == selected_tier
+    ]
+
+if selected_provider != "All":
+    filtered_df = filtered_df[
+        filtered_df["provider"] == selected_provider
+    ]
 # ============================================================
 # HEADER
 # ============================================================
@@ -103,12 +146,10 @@ if df.empty:
 # BASIC METRICS
 # ============================================================
 
-total_requests = len(df)
-
-total_cost = df["cost"].fillna(0).sum()
-
+total_requests = len(filtered_df)
+total_cost = filtered_df["cost"].fillna(0).sum()
 average_cost = (
-    df["cost"].fillna(0).mean()
+    filtered_df["cost"].fillna(0).mean()
     if total_requests > 0
     else 0
 )
@@ -138,12 +179,12 @@ def calculate_sonnet_cost(row):
     return input_cost + output_cost
 
 
-df["sonnet_baseline_cost"] = df.apply(
+filtered_df["sonnet_baseline_cost"] = filtered_df.apply(
     calculate_sonnet_cost,
     axis=1
 )
 
-all_sonnet_cost = df["sonnet_baseline_cost"].sum()
+all_sonnet_cost = filtered_df["sonnet_baseline_cost"].sum()
 
 estimated_savings = all_sonnet_cost - total_cost
 
@@ -195,7 +236,7 @@ st.divider()
 st.header("Model-Wise Analysis")
 
 model_summary = (
-    df.groupby("model_name")
+    filtered_df.groupby("model_name")
     .agg(
         requests=("id", "count"),
         total_cost=("cost", "sum"),
@@ -275,7 +316,7 @@ st.dataframe(
 st.header("Complexity-Tier Analysis")
 
 tier_summary = (
-    df.groupby("complexity_tier")
+    filtered_df.groupby("complexity_tier")
     .agg(
         requests=("id", "count"),
         total_cost=("cost", "sum"),
@@ -352,7 +393,201 @@ st.dataframe(
     hide_index=True
 )
 
+# -----------------------------
+# Latency Analysis
+# -----------------------------
 
+st.subheader("Latency Analysis")
+
+latency_summary = (
+    filtered_df.groupby("model_name")
+    .agg(
+        average_latency_ms=("latency_ms", "mean"),
+        minimum_latency_ms=("latency_ms", "min"),
+        maximum_latency_ms=("latency_ms", "max")
+    )
+    .reset_index()
+)
+
+st.dataframe(
+    latency_summary,
+    use_container_width=True
+)
+
+fig_latency = px.bar(
+    latency_summary,
+    x="model_name",
+    y="average_latency_ms",
+    title="Average Latency by Model",
+    labels={
+        "model_name": "Model",
+        "average_latency_ms": "Average Latency (ms)"
+    },
+    text_auto=".0f"
+)
+
+fig_latency.update_layout(
+    dragmode=False,
+    margin=dict(l=20, r=20, t=40, b=20)
+)
+
+st.plotly_chart(
+    fig_latency,
+    use_container_width=True,
+    config={
+        "scrollZoom": False,
+        "displayModeBar": False
+    }
+)
+
+# -----------------------------
+# Classifier Confidence Analysis
+# -----------------------------
+
+st.subheader("Classifier Confidence Analysis")
+
+confidence_summary = (
+    filtered_df.groupby("complexity_tier")
+    .agg(
+        average_confidence=("classifier_confidence", "mean"),
+        minimum_confidence=("classifier_confidence", "min"),
+        maximum_confidence=("classifier_confidence", "max")
+    )
+    .reset_index()
+)
+
+confidence_summary["average_confidence"] = (
+    confidence_summary["average_confidence"] * 100
+)
+
+confidence_summary["minimum_confidence"] = (
+    confidence_summary["minimum_confidence"] * 100
+)
+
+confidence_summary["maximum_confidence"] = (
+    confidence_summary["maximum_confidence"] * 100
+)
+
+st.dataframe(
+    confidence_summary,
+    use_container_width=True
+)
+
+fig_confidence = px.bar(
+    confidence_summary,
+    x="complexity_tier",
+    y="average_confidence",
+    title="Average Classifier Confidence by Complexity Tier",
+    labels={
+        "complexity_tier": "Complexity Tier",
+        "average_confidence": "Average Confidence (%)"
+    },
+    text_auto=".1f"
+)
+
+fig_confidence.update_layout(
+    dragmode=False,
+    margin=dict(l=20, r=20, t=40, b=20)
+)
+
+st.plotly_chart(
+    fig_confidence,
+    use_container_width=True,
+    config={
+        "scrollZoom": False,
+        "displayModeBar": False
+    }
+)
+
+# -----------------------------
+# Quality & Escalation Monitoring
+# -----------------------------
+
+st.subheader("Quality & Escalation Monitoring")
+
+positive_feedback = (
+    filtered_df["feedback"] == "positive"
+).sum()
+
+negative_feedback = (
+    filtered_df["feedback"] == "negative"
+).sum()
+
+quality_failures = (
+    filtered_df["quality_passed"] == 0
+).sum()
+
+total_escalations = (
+    filtered_df["escalated"] == 1
+).sum()
+
+escalation_cost = (
+    filtered_df["additional_cost"]
+    .fillna(0)
+    .sum()
+)
+
+col1, col2, col3, col4, col5 = st.columns(5)
+
+col1.metric(
+    "Positive Feedback",
+    positive_feedback
+)
+
+col2.metric(
+    "Negative Feedback",
+    negative_feedback
+)
+
+col3.metric(
+    "Quality Failures",
+    quality_failures
+)
+
+col4.metric(
+    "Escalations",
+    total_escalations
+)
+
+col5.metric(
+    "Escalation Cost",
+    f"${escalation_cost:.6f}"
+)
+
+feedback_data = pd.DataFrame(
+    {
+        "Feedback": [
+            "Positive",
+            "Negative"
+        ],
+        "Count": [
+            positive_feedback,
+            negative_feedback
+        ]
+    }
+)
+
+fig_feedback = px.bar(
+    feedback_data,
+    x="Feedback",
+    y="Count",
+    title="User Feedback",
+    text_auto=True
+)
+
+fig_feedback.update_layout(
+    dragmode=False,
+    margin=dict(l=20, r=20, t=40, b=20)
+)
+
+st.plotly_chart(
+    fig_feedback,
+    use_container_width=True,
+    config={
+        "scrollZoom": False,
+        "displayModeBar": False
+    }
+)
 # ============================================================
 # COST BASELINE COMPARISON
 # ============================================================
@@ -425,23 +660,23 @@ st.plotly_chart(
 st.header("Feedback, Quality & Escalation")
 
 positive_feedback = (
-    (df["feedback"] == "positive").sum()
+    (filtered_df["feedback"] == "positive").sum()
 )
 
 negative_feedback = (
-    (df["feedback"] == "negative").sum()
+    (filtered_df["feedback"] == "negative").sum()
 )
 
 quality_failures = (
-    (df["quality_passed"] == 0).sum()
+    (filtered_df["quality_passed"] == 0).sum()
 )
 
 total_escalations = (
-    (df["escalated"] == 1).sum()
+    (filtered_df["escalated"] == 1).sum()
 )
 
 escalation_cost = (
-    df["additional_cost"].fillna(0).sum()
+    filtered_df["additional_cost"].fillna(0).sum()
 )
 
 
@@ -500,7 +735,7 @@ display_columns = [
 ]
 
 st.dataframe(
-    df[display_columns],
+    filtered_df[display_columns],
     use_container_width=True,
     hide_index=True
 )
