@@ -37,7 +37,14 @@ class ModelRouter:
         # This is our V1 routing policy.
         # --------------------------------------------------
 
-        deployment_env = os.getenv("DEPLOYMENT_ENV", "local")
+        deployment_env = os.getenv("DEPLOYMENT_ENV")
+
+        if not deployment_env:
+            try:
+                import streamlit as st
+                deployment_env = st.secrets.get("DEPLOYMENT_ENV", "local")
+            except Exception:
+                deployment_env = "local"
 
         if deployment_env == "cloud":
             self.routing_map = {
