@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import os
 import joblib
 import pandas as pd
 
@@ -37,11 +37,20 @@ class ModelRouter:
         # This is our V1 routing policy.
         # --------------------------------------------------
 
-        self.routing_map = {
-            1: "llama_local",
-            2: "claude_haiku",
-            3: "claude_sonnet",
-        }
+        deployment_env = os.getenv("DEPLOYMENT_ENV", "local")
+
+        if deployment_env == "cloud":
+            self.routing_map = {
+                1: "claude_haiku",
+                2: "claude_haiku",
+                3: "claude_sonnet",
+            }
+        else:
+            self.routing_map = {
+                1: "llama_local",
+                2: "claude_haiku",
+                3: "claude_sonnet",
+            }
 
     # ======================================================
     # Predict complexity tier
