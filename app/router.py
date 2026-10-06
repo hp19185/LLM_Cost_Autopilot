@@ -10,6 +10,7 @@ from app.model_registry import ModelRegistry
 class ModelRouter:
 
     def __init__(self, deployment_env="local"):
+        print("ROUTER RECEIVED ENV:", deployment_env)
 
         # --------------------------------------------------
         # Load model registry
@@ -49,7 +50,7 @@ class ModelRouter:
                 2: "claude_haiku",
                 3: "claude_sonnet",
             }
-
+        print("ROUTER MAP:", self.routing_map)
     # ======================================================
     # Predict complexity tier
     # ======================================================
