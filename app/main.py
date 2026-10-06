@@ -1,14 +1,27 @@
 import sys
+import os
 from pathlib import Path
-
 import streamlit as st
 
-
-# Add project root to Python path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
+
+# --------------------------------------------------
+# Load Streamlit Cloud secrets before importing
+# application modules.
+# --------------------------------------------------
+
+try:
+    if "DEPLOYMENT_ENV" in st.secrets:
+        os.environ["DEPLOYMENT_ENV"] = st.secrets["DEPLOYMENT_ENV"]
+
+    if "ANTHROPIC_API_KEY" in st.secrets:
+        os.environ["ANTHROPIC_API_KEY"] = st.secrets["ANTHROPIC_API_KEY"]
+
+except Exception:
+    pass
 
 from app.autopilot import LLMCostAutopilot
 
