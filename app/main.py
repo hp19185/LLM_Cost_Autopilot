@@ -23,6 +23,9 @@ try:
 except Exception:
     pass
 
+print("DEPLOYMENT_ENV =", os.getenv("DEPLOYMENT_ENV"))
+print("STREAMLIT SECRET =", st.secrets.get("DEPLOYMENT_ENV"))
+
 from app.autopilot import LLMCostAutopilot
 
 
