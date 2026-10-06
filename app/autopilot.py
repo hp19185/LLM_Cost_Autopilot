@@ -5,6 +5,7 @@ from app.llm_interface import send_request
 from app.quality_verifier import QualityVerifier
 from app.escalation import EscalationManager
 from app.feedback import FeedbackManager
+from app.task_type_detector import detect_task_type
 
 
 from app.database import (
@@ -39,9 +40,18 @@ class LLMCostAutopilot:
     # ======================================================
 
     def process_request(self, prompt, task_type=None):
+        # --------------------------------------------------
+        # 1. Automatic task-type detection
+        # --------------------------------------------------
+
+        task_type_result = detect_task_type(prompt)
+
+        detected_task_type = task_type_result["task_type"]
+
+        task_type_confidence = task_type_result["confidence"]
 
         # --------------------------------------------------
-        # 1. Dynamic routing
+        # 2. Dynamic routing
         # --------------------------------------------------
 
         routing_result = self.router.select_model(prompt)
@@ -55,25 +65,27 @@ class LLMCostAutopilot:
         confidence = routing_result["confidence"]
 
         # --------------------------------------------------
-        # 2. Send request to selected model
+        # 3. Send request to selected model
         # --------------------------------------------------
 
         response = send_request(prompt=prompt, model_config=current_model)
 
         # --------------------------------------------------
-        # 3. Generate prompt hash
+        # 4. Generate prompt hash
         # --------------------------------------------------
 
         prompt_hash = hashlib.sha256(prompt.encode("utf-8")).hexdigest()
 
         # --------------------------------------------------
-        # 4. Save request in database
+        # 5. Save request in database
         # --------------------------------------------------
 
         request_id = log_request(
             prompt_hash=prompt_hash,
             complexity_tier=tier,
             classifier_confidence=confidence,
+            task_type=detected_task_type,
+            task_type_confidence=task_type_confidence,
             model_name=current_model_name,
             provider=current_model.provider,
             model_id=current_model.model_id,
@@ -87,12 +99,12 @@ class LLMCostAutopilot:
         )
 
         # --------------------------------------------------
-        # 5. Keep request information for feedback
+        # 6. Keep request information for feedback
         # --------------------------------------------------
 
         self.active_requests[request_id] = {
             "prompt": prompt,
-            "task_type": task_type,
+            "task_type": detected_task_type,
             "model_name": current_model_name,
             "model_config": current_model,
             "tier": tier,
@@ -110,7 +122,7 @@ class LLMCostAutopilot:
         }
 
         # --------------------------------------------------
-        # 6. Return response immediately
+        # 7. Return response immediately
         # --------------------------------------------------
         return {
             "request_id": request_id,
@@ -125,6 +137,8 @@ class LLMCostAutopilot:
             "quality_score": None,
             "escalated": False,
             "escalation_count": 0,
+            "task_type": detected_task_type,
+            "task_type_confidence": task_type_confidence,
             "attempts":
                 self.active_requests[request_id]["attempts"]
         }

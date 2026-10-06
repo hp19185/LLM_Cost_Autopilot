@@ -58,6 +58,10 @@ def initialize_database():
             complexity_tier INTEGER,
 
             classifier_confidence REAL,
+            
+            task_type TEXT,
+
+            task_type_confidence REAL,
 
             model_name TEXT,
 
@@ -123,6 +127,12 @@ def initialize_database():
         "verification_method":
             "TEXT",
 
+        "task_type":
+            "TEXT",
+
+        "task_type_confidence":
+            "REAL",
+
         "user_consent":
             "INTEGER",
 
@@ -159,33 +169,21 @@ def initialize_database():
 # ============================================================
 
 def log_request(
-
     prompt_hash,
-
     complexity_tier,
-
     classifier_confidence,
-
+    task_type,
+    task_type_confidence,
     model_name,
-
     provider,
-
     model_id,
-
     input_tokens,
-
     output_tokens,
-
     latency_ms,
-
     cost,
-
     quality_score=None,
-
     escalated=False,
-
     escalated_model=None
-
 ):
 
     connection = get_connection()
@@ -202,6 +200,8 @@ def log_request(
             prompt_hash,
             complexity_tier,
             classifier_confidence,
+            task_type,
+            task_type_confidence,
             model_name,
             provider,
             model_id,
@@ -215,7 +215,7 @@ def log_request(
 
         )
 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
 
         (
@@ -223,6 +223,8 @@ def log_request(
             prompt_hash,
             complexity_tier,
             classifier_confidence,
+            task_type,
+            task_type_confidence,
             model_name,
             provider,
             model_id,
