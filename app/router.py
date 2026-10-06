@@ -9,7 +9,7 @@ from app.model_registry import ModelRegistry
 
 class ModelRouter:
 
-    def __init__(self):
+    def __init__(self, deployment_env="local"):
 
         # --------------------------------------------------
         # Load model registry

@@ -20,7 +20,9 @@ class LLMCostAutopilot:
 
     def __init__(self):
 
-        self.router = ModelRouter()
+        self.router = ModelRouter(
+            deployment_env=os.getenv("DEPLOYMENT_ENV", "local")
+        )
 
         # Quality verifier is kept,
         # but it is NOT used for every response.
