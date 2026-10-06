@@ -1,7 +1,7 @@
 from app.router import ModelRouter
 from app.llm_interface import send_request
 from app.logger import log_llm_request
-
+from app.task_type_detector import detect_task_type
 
 # ============================================================
 # Create router
@@ -88,6 +88,10 @@ for index, prompt in enumerate(
     # --------------------------------------------------------
 
     routing_result = router.select_model(prompt)
+    task_type_result = detect_task_type(prompt)
+
+    routing_result["task_type"] = task_type_result["task_type"]
+    routing_result["task_type_confidence"] = task_type_result["confidence"]
 
     selected_model = routing_result["model_config"]
 

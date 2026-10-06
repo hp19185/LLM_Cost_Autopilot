@@ -12,6 +12,8 @@ def show_latest_request():
             model_name,
             provider,
             cost,
+            task_type,
+            task_type_confidence,
             feedback,
             quality_score,
             quality_passed,

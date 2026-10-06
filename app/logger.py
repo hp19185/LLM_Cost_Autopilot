@@ -58,6 +58,14 @@ def log_llm_request(
             "confidence"
         ],
 
+        task_type=routing_result[
+            "task_type"
+        ],
+
+        task_type_confidence=routing_result[
+            "task_type_confidence"
+        ],
+
         model_name=routing_result[
             "model_name"
         ],
