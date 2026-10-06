@@ -1,6 +1,7 @@
 streamlit
 scikit-learn
 joblib
+PyYAML
 pandas
 numpy
 matplotlib
@@ -8,3 +9,4 @@ requests
 python-dotenv
 openai
 anthropic
+
