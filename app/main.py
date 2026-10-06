@@ -101,8 +101,6 @@ if "last_result" in st.session_state:
 
     st.subheader("Request Information")
 
-    st.subheader("Request Information")
-
     col1, col2, col3, col4 = st.columns(4)
 
     col1.metric(
