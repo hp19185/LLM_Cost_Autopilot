@@ -10,9 +10,6 @@ from app.model_registry import ModelRegistry
 class ModelRouter:
 
     def __init__(self, deployment_env="local"):
-        raise RuntimeError("NEW ROUTER.PY IS LOADED")
-
-        print("ROUTER RECEIVED ENV:", deployment_env)
         print("ROUTER RECEIVED ENV:", deployment_env)
 
         # --------------------------------------------------
