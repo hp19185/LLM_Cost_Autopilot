@@ -44,7 +44,7 @@ class ModelRouter:
         if not deployment_env:
             try:
                 import streamlit as st
-                deployment_env = st.secrets.get("DEPLOYMENT_ENV", "local")
+                deployment_env = st.secrets["DEPLOYMENT_ENV"]
                 print("DEBUG DEPLOYMENT_ENV from Streamlit secrets:", deployment_env)
             except Exception as e:
                 print("DEBUG Streamlit secrets error:", e)
